@@ -1,11 +1,34 @@
 <script>
+import { store } from "../store"
+import axios from "axios"
 import SingleCard from "./SingleCard.vue"
-
+import loader from "./loader.vue"
+import selezione from "./selezione.vue"
 export default{
     name:"Main",
     components:{
         SingleCard,
-    }
+        loader,
+        selezione,
+    },
+    data() {
+        return {
+            store
+        }
+    },
+    methods:{
+        addCard(){
+            store.load=false
+            axios.get(store.url).then(res =>{
+                store.card=res.data.data
+                store.load=true
+            })
+        }
+    },
+    mounted() {
+        this.addCard()
+    },
+    
     
 }
 
@@ -16,16 +39,17 @@ export default{
 <template>
     <div class="container">
         <div class="containerInside">
-            <select name="type" id="type">
-            <option value="Alien">Alien</option>
-            </select>
+        
+            <selezione/>
+
             <div class="containerCard">
                 <div>
                     <div class="foundCard">
-                        <span>Found 39 card</span>
+                        <span>Element found</span>
                     </div>
-                    <div class="cards">
-                        <SingleCard/>
+                    <loader v-if="store.load=false"/>
+                    <div v-else class="cards">
+                        <SingleCard v-for="element in store.card" :propsElement="element"/>
                     </div>
                 </div>
             </div>
@@ -43,12 +67,12 @@ export default{
         .containerInside{
             padding: 10px;
             width: 95%;
-            height: 500px;
             background-color: $yellowYu;
             display: flex;
             flex-direction: column;
             gap: 20px;
             margin: 0 auto;
+            
             #type{
                 width: 120px;
                 height: 30px;
@@ -75,6 +99,11 @@ export default{
                     .cards{
                         width: 95%;
                         margin: 0 auto;
+                        display: flex;
+                        flex-wrap: wrap;
+                        justify-content: space-between;
+                        gap: 20px;
+                        
                     }
 
                 }
