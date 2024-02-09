@@ -1,13 +1,22 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
+<script>
+import Header from "./components/Header.vue"
+import Main from "./components/Main.vue"
+
+export default {
+  components:{
+    Header,
+    Main
+  }
+}
 </script>
 
 
 <template>
-  <HelloWorld/>
+  <Header/>
+  <Main/>
 </template>
 
-<style scoped>
+<style>
 
 
 </style>
