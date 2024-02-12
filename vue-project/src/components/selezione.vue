@@ -34,10 +34,13 @@ export default{
 
 <template>
      <select name="typ" id="typ" v-model="store.selectValue" @change="$emit('functioncard')">
-            <option v-for="(element,index) in store.type" :value="element" >{{ element }}</option>
-            </select> 
+        <option value="" selected>Tutte le classi</option>
+        <option v-for="(element,index) in store.type" :value="element" >{{ element }}</option>
+        </select> 
 </template>
 
 <style lang="scss" scoped>
-
+    #typ{
+        width: 150px;
+    }
 </style>
