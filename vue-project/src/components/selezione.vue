@@ -1,4 +1,5 @@
 <script>
+import axios from "axios"
 import { store } from "../store"
 
 export default{
@@ -11,18 +12,12 @@ export default{
     },
         methods:{
         aggiuntatype(){
-            setTimeout(() => {
+            axios.get("https://db.ygoprodeck.com/api/v7/archetypes.php").then( (res) =>{
+ 
+                for(let i=0; i<res.data.length;i++)
+                store.type.push(res.data[i].archetype_name)
                 
-                store.card.forEach((element,index) => {
-                    if(element.archetype == null){
-
-                    }else if(store.type.includes(element.archetype)){
-    
-                    }else{
-                        store.type.push(element.archetype)
-                    }
-                });
-            }, 500);
+            })
             console.log(store.type)
         }
       
