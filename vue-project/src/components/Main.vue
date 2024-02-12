@@ -45,7 +45,7 @@ export default{
             <div class="containerCard">
                 <div>
                     <div class="foundCard">
-                        <span>Element found</span>
+                        <span>Found {{ store.card.length }} cards</span>
                     </div>
                     <loader v-if="store.load=false"/>
                     <div v-else class="cards">
