@@ -18,11 +18,17 @@ export default{
     },
     methods:{
         addCard(){
-            store.load=false
-            axios.get(store.url).then(res =>{
+            if(store.selectValue){
+            axios.get("https://db.ygoprodeck.com/api/v7/cardinfo.php?num=20&offset=0&archetype=" + store.selectValue).then(res =>{
                 store.card=res.data.data
-                store.load=true
             })
+            }else{
+                store.load=false
+                axios.get(store.url).then(res =>{
+                    store.card=res.data.data
+                    store.load=true
+                })
+            }
         }
     },
     mounted() {
@@ -40,7 +46,7 @@ export default{
     <div class="container">
         <div class="containerInside">
         
-            <selezione/>
+            <selezione  @functioncard="addCard"/>
 
             <div class="containerCard">
                 <div>

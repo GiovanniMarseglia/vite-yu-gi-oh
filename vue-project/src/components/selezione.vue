@@ -7,7 +7,8 @@ export default{
 
     data() {
         return {
-            store
+            store,
+            emits: 'functioncard'
         }
     },
         methods:{
@@ -32,8 +33,8 @@ export default{
 
 
 <template>
-     <select name="typ" id="typ">
-            <option v-for="(element,index) in store.type" :value="element">{{ element }}</option>
+     <select name="typ" id="typ" v-model="store.selectValue" @change="$emit('functioncard')">
+            <option v-for="(element,index) in store.type" :value="element" >{{ element }}</option>
             </select> 
 </template>
 
