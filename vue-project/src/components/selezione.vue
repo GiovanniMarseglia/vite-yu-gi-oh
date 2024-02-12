@@ -8,7 +8,7 @@ export default{
     data() {
         return {
             store,
-            emits: 'functioncard'
+            
         }
     },
         methods:{
