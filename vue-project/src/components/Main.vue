@@ -19,8 +19,10 @@ export default{
     methods:{
         addCard(){
             if(store.selectValue){
+                store.load=false
             axios.get("https://db.ygoprodeck.com/api/v7/cardinfo.php?num=20&offset=0&archetype=" + store.selectValue).then(res =>{
                 store.card=res.data.data
+                store.load=true
             })
             }else{
                 store.load=false
@@ -53,7 +55,7 @@ export default{
                     <div class="foundCard">
                         <span>Found {{ store.card.length }} cards</span>
                     </div>
-                    <loader v-if="store.load=false"/>
+                    <loader v-if="store.load==false"/>
                     <div v-else class="cards">
                         <SingleCard v-for="element in store.card" :propsElement="element"/>
                     </div>
